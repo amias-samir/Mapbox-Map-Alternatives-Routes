@@ -73,6 +73,7 @@ public class DrawRouteOnMap {
                         }
                         if(response.body().routes().size()>0){
                             navigationMapRoute.addRoutes(response.body().routes());
+
                             navigationMapRoute.showAlternativeRoutes(true);
                         }else {
                             Toast.makeText(context, "Routes not found", Toast.LENGTH_SHORT).show();
@@ -92,7 +93,8 @@ public class DrawRouteOnMap {
                     public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
                         Log.e(TAG, "Error: " + throwable.getMessage());
                     }
-                });
+                })
+        ;
 
 
     }

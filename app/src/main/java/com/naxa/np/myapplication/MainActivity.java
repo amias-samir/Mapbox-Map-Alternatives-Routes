@@ -1,13 +1,12 @@
 package com.naxa.np.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
@@ -28,11 +27,6 @@ import com.naxa.np.myapplication.constants.Constants;
 import com.naxa.np.myapplication.utils.DrawRouteOnMap;
 
 import java.util.List;
-
-import timber.log.Timber;
-
-import static com.naxa.np.myapplication.constants.Constants.Permission.LOCATION_COURSE;
-import static com.naxa.np.myapplication.constants.Constants.Permission.LOCATION_FINE;
 
 public class MainActivity extends BaseActivity implements OnMapReadyCallback, PermissionsListener, View.OnClickListener {
     private MapView mapView;
@@ -66,7 +60,6 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
         MainActivity.this.mapboxMap = mapboxMap;
-//        mapboxMap.addOnMapClickListener(this);
         destinationLocation = Point.fromLngLat(destinationCoordinates.getLongitude(), destinationCoordinates.getLatitude());
 
         drawRouteOnMap = new DrawRouteOnMap(MainActivity.this, mapboxMap, mapView);
@@ -104,25 +97,6 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(this);
         }
-
-//        checkPermission(Constants.PermissionID.RC_LOCATION, new String[]{LOCATION_FINE, LOCATION_COURSE},
-//                getString(R.string.user_location_permission_explanation), new PermissionRequestListener() {
-//                    @Override
-//                    public void onPermissionGranted() {
-//                        mapboxMap.getStyle(new Style.OnStyleLoaded() {
-//                            @Override
-//                            public void onStyleLoaded(@NonNull Style style) {
-//                                enableLocationComponent(style);
-//                            }
-//                        });
-//                    }
-//
-//                    @Override
-//                    public void onPermissionDenied() {
-//                        Toast.makeText(MainActivity.this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
-//                        finish();
-//                    }
-//                });
     }
 
     @Override
@@ -192,16 +166,6 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
         mapView.onSaveInstanceState(outState);
     }
 
-//    @Override
-//    public boolean onMapClick(@NonNull LatLng point) {
-//        mapboxMap.clear();
-//        mapboxMap.addMarker(new MarkerOptions()
-//                .position(point)
-//                .title("title"));
-//        destinationLocation = Point.fromLngLat(point.getLongitude(), point.getLatitude());
-//        btnGetRoute.setVisibility(View.VISIBLE);
-//        return false;
-//    }
 
     @Override
     public void onClick(View v) {
