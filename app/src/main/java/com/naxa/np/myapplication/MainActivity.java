@@ -28,7 +28,7 @@ import com.naxa.np.myapplication.utils.DrawRouteOnMap;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements OnMapReadyCallback, PermissionsListener, View.OnClickListener {
+public class MainActivity extends BaseActivity implements OnMapReadyCallback, PermissionsListener, View.OnClickListener, MapboxMap.OnMapClickListener {
     private MapView mapView;
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
         destinationLocation = Point.fromLngLat(destinationCoordinates.getLongitude(), destinationCoordinates.getLatitude());
 
         drawRouteOnMap = new DrawRouteOnMap(MainActivity.this, mapboxMap, mapView);
+        mapboxMap.addOnMapClickListener(this);
 
 
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
@@ -182,5 +183,16 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
                 drawRouteOnMap.enableNavigationUiLauncher(MainActivity.this);
                 break;
         }
+    }
+
+    @Override
+    public boolean onMapClick(@NonNull LatLng point) {
+
+        mapboxMap.clear();
+        mapboxMap.addMarker(new MarkerOptions()
+                .position(point)
+                .title("title"));
+        destinationLocation = Point.fromLngLat(point.getLongitude(), point.getLatitude());
+        return false;
     }
 }
