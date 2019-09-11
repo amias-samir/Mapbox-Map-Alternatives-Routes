@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
     Point destinationLocation ;
     LatLng destinationCoordinates = new LatLng(27.728023729223038, 85.34581927126185);
 
-    Button btnGetRoute;
+    Button btnGetRoute, btnNavigate;
     DrawRouteOnMap drawRouteOnMap;
 
 
@@ -53,10 +53,12 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
         setContentView(R.layout.activity_main);
         mapView = findViewById(R.id.mapView);
         btnGetRoute = findViewById(R.id.btn_get_route);
+        btnNavigate = findViewById(R.id.btn_navigate);
         mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync(this);
         btnGetRoute.setOnClickListener(this);
+        btnNavigate.setOnClickListener(this);
     }
 
 
@@ -210,8 +212,10 @@ public class MainActivity extends BaseActivity implements OnMapReadyCallback, Pe
                 Log.d(TAG,"onClick: Destination location "+destinationLocation);
                 drawRouteOnMap.removeRoute();
                 drawRouteOnMap.getRoute(currentLocation, destinationLocation);
+                break;
 
-
+            case R.id.btn_navigate:
+                drawRouteOnMap.enableNavigationUiLauncher(MainActivity.this);
                 break;
         }
     }
