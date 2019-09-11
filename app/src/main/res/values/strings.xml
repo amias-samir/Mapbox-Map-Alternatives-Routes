@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="user_location_permission_explanation">This App needs Location permission to get current location.</string>
+    <string name="user_location_permission_not_granted">location Permission denied.</string>
+</resources>
