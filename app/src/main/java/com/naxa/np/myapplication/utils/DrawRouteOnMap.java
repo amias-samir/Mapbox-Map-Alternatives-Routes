@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.api.directions.v5.models.RouteOptions;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -73,7 +74,6 @@ public class DrawRouteOnMap {
                         }
                         if(response.body().routes().size()>0){
                             navigationMapRoute.addRoutes(response.body().routes());
-
                             navigationMapRoute.showAlternativeRoutes(true);
                         }else {
                             Toast.makeText(context, "Routes not found", Toast.LENGTH_SHORT).show();
@@ -100,7 +100,7 @@ public class DrawRouteOnMap {
     }
 
     public void enableNavigationUiLauncher (AppCompatActivity activity){
-        boolean simulateRoute = false;
+        boolean simulateRoute = true;
         NavigationLauncherOptions options = NavigationLauncherOptions.builder()
                 .directionsRoute(currentRoute)
                 .shouldSimulateRoute(simulateRoute)
